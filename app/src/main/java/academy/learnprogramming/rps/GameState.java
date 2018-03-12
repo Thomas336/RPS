@@ -127,17 +127,17 @@ class GameState {
         System.out.println(players.get(0).getSelection()+", "+players.get(1).getSelection());
         for(Player p1:players) {
             for(Player p2:players) {
-                if(!p1.equals(p2)) {
-                    switch(p1.getSelection()) {
-                        case ROCK:
-                            if(p2.getSelection() == Card.SCISSORS) p1.addScore(1);
-                            break;
-                        case PAPER:
-                            if(p2.getSelection() == Card.ROCK) p1.addScore(1);
-                            break;
-                        case SCISSORS:
-                            if(p2.getSelection() == Card.PAPER) p1.addScore(1);
-                            break;
+                if(!p1.equals(p2)) continue;
+				switch(p1.getSelection()) {
+				    case ROCK:
+				        if(p2.getSelection() == Card.SCISSORS) p1.addScore(1);
+				        break;
+				    case PAPER:
+				        if(p2.getSelection() == Card.ROCK) p1.addScore(1);
+				        break;
+				    case SCISSORS:
+				        if(p2.getSelection() == Card.PAPER) p1.addScore(1);
+				        break;
                 }
             }
         }
