@@ -127,7 +127,7 @@ class GameState {
         System.out.println(players.get(0).getSelection()+", "+players.get(1).getSelection());
         for(Player p1:players) {
             for(Player p2:players) {
-                if(!p1.equals(p2)) continue;
+                if(p1.equals(p2)) continue;
 				switch(p1.getSelection()) {
 				    case ROCK:
 				        if(p2.getSelection() == Card.SCISSORS) p1.addScore(1);
