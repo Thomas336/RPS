@@ -35,6 +35,13 @@ class GameState {
     }
 
     /**
+     * Removes all players from the players array, used at the end of a singleplayer game.
+     */
+    void clearPlayers() {
+        players.clear();
+    }
+
+    /**
      * Sets a players selected card
      * @param pid The player to change the selection of
      * @param selection The card the player should selectCard
@@ -117,6 +124,7 @@ class GameState {
     }
 
     void applyScores() {
+        System.out.println(players.get(0).getSelection()+", "+players.get(1).getSelection());
         for(Player p1:players) {
             for(Player p2:players) {
                 if(!p1.equals(p2)) {
@@ -130,7 +138,6 @@ class GameState {
                         case SCISSORS:
                             if(p2.getSelection() == Card.PAPER) p1.addScore(1);
                             break;
-                    }
                 }
             }
         }

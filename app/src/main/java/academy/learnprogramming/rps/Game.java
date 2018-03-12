@@ -36,6 +36,9 @@ public class Game extends AppCompatActivity {
     private TextView p1score, p2score;
     private ProgressBar matchTimer1, matchTimer2;
 
+    private Thread gameThread;
+    boolean wasDestroyed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,14 +155,28 @@ public class Game extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try {
+            wasDestroyed = true;
+            gameThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        gameState.clearPlayers();
+    }
+
     public void startGame() {
         unGrayButtons();
 
         initGame();
         gameState.startGame();
 
-        Thread gameThread = new Thread(() -> {
-            while(!gameState.isGameOver()) {
+        gameThread = new Thread(() -> {
+            while(!gameState.isGameOver() && !wasDestroyed) {
                 try {
                     gameState.applyScores();
 
